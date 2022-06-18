@@ -1,20 +1,16 @@
 const express = require("express");
-const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-const keys = require("./config/keys");
+const router = require("./routes/routers");
+const db = require("./config/mongoose");
+const app = express();
 
 require("./services/cache");
-require("./models/center");
 
-const app = express();
 app.use(bodyParser.json());
 
-mongoose.connect("mongodb+srv://vothang:231236@vnvc.i3fhjxi.mongodb.net/vnvc", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+db.connect();
 
-require("./routes/centerRoutes")(app);
+app.use("/api", router);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
