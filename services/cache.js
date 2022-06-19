@@ -47,10 +47,13 @@ mongoose.Query.prototype.exec = async function () {
 const setRedis = async (key, value, time) => {
   client.set(key, value, "EX", time);
 };
-
+const delRedis = async (key) => {
+  client.del(key);
+};
 module.exports = {
   clearKey(hashKey) {
     client.del(JSON.stringify(hashKey));
   },
   setRedis,
+  delRedis,
 };

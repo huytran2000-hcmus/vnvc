@@ -1,7 +1,6 @@
 const Account = require("../models/account");
 const { generateToken } = require("../services/authJWT");
-const { setRedis } = require("../services/cache");
-
+const { setRedis, delRedis } = require("../services/cache");
 class AccountController {
   login = async (req, res, next) => {
     try {
@@ -25,17 +24,20 @@ class AccountController {
         .status(200)
         .json({ message: "login successful", token: token });
     } catch (error) {
-      console.log(error);
-      next(error);
+      return res.status(500).json({ message: err.message });
     }
   };
-  // logout = async (req, res, next) => {
-  //   try {
-
-  //   } catch (error) {
-  //     console.log(error);
-  //     next(error);
-  //   }
-  // };
+  logout = async (req, res, next) => {
+    try {
+      const userId = req.userId;
+      const user = await Account.findOne({ _id: userId });
+      const key = "phone:" + user.phone;
+      console.log(key);
+      delRedis(key);
+      return res.status(200).json({ message: "logout successful" });
+    } catch (error) {
+      return res.status(500).json({ message: err.message });
+    }
+  };
 }
 module.exports = new AccountController();
