@@ -8,7 +8,6 @@ class CenterController {
       center = await Center.find({
         "address.province": req.query.province,
       }).cache();
-      console.log(typeof center);
     } else {
       center = await Center.find().cache({
         time: 10,

@@ -44,9 +44,13 @@ mongoose.Query.prototype.exec = async function () {
   console.log("Response from MongoDB");
   return result;
 };
+const setRedis = async (key, value, time) => {
+  client.set(key, value, "EX", time);
+};
 
 module.exports = {
   clearKey(hashKey) {
     client.del(JSON.stringify(hashKey));
   },
+  setRedis,
 };
