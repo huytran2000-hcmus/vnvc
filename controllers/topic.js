@@ -5,7 +5,7 @@ class TopicController {
     try {
       let topic;
       topic = await Topic.find().cache({
-        time: 10,
+        time: 30,
       });
       return res.json({ data: topic });
     } catch (err) {

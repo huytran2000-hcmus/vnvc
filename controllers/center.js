@@ -10,7 +10,7 @@ class CenterController {
       }).cache();
     } else {
       center = await Center.find().cache({
-        time: 10,
+        time: 60,
       });
     }
     return res.json({ data: center });

@@ -3,7 +3,7 @@ const redis = require("redis");
 const util = require("util");
 
 const client = redis.createClient({
-  url: "redis://default:redispw@localhost:49153",
+  url: "redis://default:redispw@localhost:6379",
 });
 client.hget = util.promisify(client.hget);
 const exec = mongoose.Query.prototype.exec;
@@ -29,7 +29,6 @@ mongoose.Query.prototype.exec = async function () {
 
   if (cacheValue) {
     const doc = JSON.parse(cacheValue);
-    client.expire(this.hashKey, this.time);
     console.log("Response from Redis");
     return Array.isArray(doc)
       ? doc.map((d) => new this.model(d))

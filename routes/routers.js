@@ -9,7 +9,7 @@ const vaccine_packetRouter = require("./vaccine_packet");
 
 router.use("/center", centerRouter);
 router.use("/topic", topicRouter);
-router.use("/questions_and_answer", questions_and_answerRouter);
+router.use("/questions_and_answers", questions_and_answerRouter);
 router.use("/user", accountRouter);
 router.use("/vaccine_categories", vaccine_categoriesRouter);
 router.use("/vaccine_packet", vaccine_packetRouter);
