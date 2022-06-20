@@ -5,7 +5,7 @@ class Vaccine_categoriesController {
     try {
       let vaccine_categories;
       vaccine_categories = await Vaccine_categories.find().cache({
-        time: 30,
+        time: 60 * 60 * 24,
       });
       console.log("DDAD");
 

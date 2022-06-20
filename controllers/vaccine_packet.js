@@ -9,7 +9,7 @@ class Vaccine_packetController {
         $text: { $search: name },
         category_name: category_name,
         subcategory_name: subcategory_name,
-      });
+      }).sort({ score: { $meta: "textScore" } });
       return res.json({ data: vaccine_packet });
     } catch (err) {
       return res.status(500).json({ message: err.message });

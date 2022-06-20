@@ -7,5 +7,5 @@ const { verifyToken } = require("../middleware/authJWT");
 
 router.post("/login", AccountController.login);
 //
-router.get("/logout", verifyToken, AccountController.logout);
+router.post("/logout", verifyToken, AccountController.logout);
 module.exports = router;
