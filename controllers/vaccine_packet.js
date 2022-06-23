@@ -4,9 +4,9 @@ class Vaccine_packetController {
   async searchVaccine(req, res) {
     try {
       let vaccine_packet;
-      const { name, category_name, subcategory_name } = req.query;
+      const { search, category_name, subcategory_name } = req.query;
       vaccine_packet = await Vaccine_packet.find({
-        $text: { $search: name },
+        $text: { $search: search },
         category_name: category_name,
         subcategory_name: subcategory_name,
       }).sort({ score: { $meta: "textScore" } });

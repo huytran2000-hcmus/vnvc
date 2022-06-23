@@ -49,10 +49,15 @@ const setRedis = async (key, value, time) => {
 const delRedis = async (key) => {
   client.del(key);
 };
+const isKeyExist = async (key) => {
+  console.log(client.get(key));
+  return client.get(key) ? true : false;
+};
 module.exports = {
   clearKey(hashKey) {
     client.del(JSON.stringify(hashKey));
   },
   setRedis,
   delRedis,
+  isKeyExist,
 };

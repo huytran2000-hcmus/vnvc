@@ -1,6 +1,6 @@
 const Account = require("../models/account");
 const { generateToken } = require("../services/authJWT");
-const { setRedis, delRedis } = require("../services/cache");
+const { setRedis, delRedis, isKeyExist } = require("../services/cache");
 class AccountController {
   login = async (req, res, next) => {
     try {
@@ -33,6 +33,9 @@ class AccountController {
       const user = await Account.findOne({ _id: userId });
       const key = "phone:" + user.phone;
       console.log(key);
+      if (!isKeyExist(key)) {
+        return res.status(400).json({ message: "Account isn't login!" });
+      }
       delRedis(key);
       return res.status(200).json({ message: "logout successful" });
     } catch (error) {
