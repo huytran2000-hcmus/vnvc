@@ -1,7 +1,11 @@
+const { reject } = require("lodash");
 const mongoose = require("mongoose");
+const { resolve } = require("path");
 const redis = require("redis");
 const util = require("util");
 
+// const client = redis.createClient(49163);
+// client.on("error", (err) => console.log("Redis Client Error", err));
 const client = redis.createClient({
   url: "redis://default:redispw@localhost:6379",
 });
@@ -50,8 +54,12 @@ const delRedis = async (key) => {
   client.del(key);
 };
 const isKeyExist = async (key) => {
-  console.log(client.get(key));
-  return client.get(key) ? true : false;
+  return new Promise((resolve, reject) => {
+    client.get(key, (err, data) => {
+      if (err) reject(err);
+      else resolve(data);
+    });
+  });
 };
 module.exports = {
   clearKey(hashKey) {
