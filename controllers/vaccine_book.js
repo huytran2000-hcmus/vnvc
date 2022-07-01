@@ -2,7 +2,7 @@ const Vaccine_book = require("../models/vaccine_book");
 class vaccine_infoController {
   async getWithPhone(req, res) {
     try {
-      let { phone } = req.query;
+      let phone = req.phone;
       const data = await Vaccine_book.find({
         "contact.phone": phone,
       }).cache({ time: 60 * 60 * 24 });
