@@ -1,11 +1,11 @@
 const jwt = require("jsonwebtoken");
 
-const generateToken = (id) => {
+const generateToken = (phone) => {
   const ACCESS_TOKEN_SECRET = "PTUDHTTHD";
 
   const token = jwt.sign(
     {
-      id: id.toString(),
+      phone: phone,
     },
     ACCESS_TOKEN_SECRET,
     { expiresIn: "1d" }
