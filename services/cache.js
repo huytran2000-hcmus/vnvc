@@ -3,7 +3,10 @@ const redis = require("redis");
 const util = require("util");
 
 const client = redis.createClient({
-  url: "redis://default:redispw@localhost:6379",
+  url: "redis://localhost:6379",
+});
+client.on("connect", () => {
+  console.log("Redis connection successfull");
 });
 client.hget = util.promisify(client.hget);
 const exec = mongoose.Query.prototype.exec;
