@@ -9,7 +9,7 @@ const {
   clearKey,
 } = require("../services/cache");
 class AccountController {
-  register = async (req, ré, next) => {
+  register = async (req, res, next) => {
     try {
       const { phone, password } = req.body;
       const isExist = await Account.findOne({ phone: phone });
@@ -19,9 +19,10 @@ class AccountController {
       const salt = bcrypt.genSaltSync(8);
       const passwordHash = bcrypt.hashSync(password, salt);
       const account = new Account({ phone, password: passwordHash });
-      const data = await account.save();
+      await account.save();
       return res.status(200).json({ message: "Account create success" });
     } catch (error) {
+      console.log(error);
       return res.status(500).json({ message: "Error creating account" });
     }
   };

@@ -6,7 +6,6 @@ const accountShema = new Schema({
   password: { type: String },
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
-  role: { type: String, required: true },
 });
 
 module.exports = model = mongoose.model("Account", accountShema);
