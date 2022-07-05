@@ -8,12 +8,16 @@ async function connect() {
         useUnifiedTopology: true,
       }
     );
-    console.log("DB CONNECTION SUCCESSFUL");
+    console.log("MongoDB connection successfull");
   } catch (error) {
-    console.log("DB CONNECTION FAIL: " + error);
+    console.log("MongoDB connection failed: " + error);
     return res
       .status(400)
-      .json({ success: false, data: null, errors: "DB CONNECTION FAIL" });
+      .json({
+        success: false,
+        data: null,
+        errors: "MongoDB connection failed",
+      });
   }
 }
 

@@ -8,7 +8,6 @@ const vaccine_categoriesRouter = require("./vaccine_categories");
 const vaccine_packetRouter = require("./vaccine_packet");
 const vaccineRouter = require("./vaccine");
 const vaccine_infoRouter = require("./vaccine_info");
-const vaccine_bookRouter = require("./vaccine_book");
 
 router.use("/center", centerRouter);
 router.use("/topic", topicRouter);
@@ -17,5 +16,5 @@ router.use("/user", accountRouter);
 router.use("/vaccine_categories", vaccine_categoriesRouter);
 router.use("/vaccine_packet", vaccine_packetRouter);
 router.use("/vaccine", vaccineRouter);
-router.use("/vaccine_book", vaccine_bookRouter);
+router.use("/vaccine_info", vaccine_infoRouter);
 module.exports = router;
