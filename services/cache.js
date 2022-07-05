@@ -4,11 +4,11 @@ const { resolve } = require("path");
 const redis = require("redis");
 const util = require("util");
 
-// const client = redis.createClient(49163);
-// client.on("error", (err) => console.log("Redis Client Error", err));
-const client = redis.createClient({
-  url: "redis://default:redispw@localhost:6379",
-});
+const client = redis.createClient(49163);
+client.on("error", (err) => console.log("Redis Client Error", err));
+// const client = redis.createClient({
+//   url: "redis://default:redispw@localhost:6379",
+// });
 client.hget = util.promisify(client.hget);
 const exec = mongoose.Query.prototype.exec;
 

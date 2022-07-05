@@ -1,4 +1,6 @@
 const Account = require("../models/account");
+const bcrypt = require("bcryptjs");
+
 const { generateToken } = require("../services/authJWT");
 const {
   setRedis,
@@ -7,6 +9,22 @@ const {
   clearKey,
 } = require("../services/cache");
 class AccountController {
+  register = async (req, ré, next) => {
+    try {
+      const { phone, password } = req.body;
+      const isExist = await Account.findOne({ phone: phone });
+      if (isExist) {
+        return res.status(400).json({ message: "phone is Exist" });
+      }
+      const salt = bcrypt.genSaltSync(8);
+      const passwordHash = bcrypt.hashSync(password, salt);
+      const account = new Account({ phone, password: passwordHash });
+      const data = await account.save();
+      return res.status(200).json({ message: "Account create success" });
+    } catch (error) {
+      return res.status(500).json({ message: "Error creating account" });
+    }
+  };
   login = async (req, res, next) => {
     try {
       const { phone, password } = req.body;
@@ -19,7 +37,9 @@ class AccountController {
       if (!account) {
         return res.status(403).json({ message: "Account not found" });
       }
-      if (account.password != password) {
+      const isValidPassword = await bcrypt.compare(password, account.password);
+
+      if (!isValidPassword) {
         return res.status(403).json({ message: "Password not found" });
       }
       const token = await generateToken(account.phone);
