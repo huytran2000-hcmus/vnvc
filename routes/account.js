@@ -10,7 +10,7 @@ const { registerValidator } = require("../middleware/index");
 
 router.post("/login", AccountController.login);
 router.get("/vaccine_book", verifyToken, VaccineBookController.getWithPhone);
-router.post("/vaccine_book", verifyToken, VaccineBookController.addVaccineBook);
+router.post("/vaccine_book", VaccineBookController.addVaccineBook);
 
 router.post("/register", registerValidator, AccountController.register);
 router.post("/logout", verifyToken, AccountController.logout);
