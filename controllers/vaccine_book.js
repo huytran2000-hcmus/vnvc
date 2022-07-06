@@ -61,8 +61,6 @@ class vaccine_infoController {
       await newVaccine_book.save();
       return res.status(200).json({ message: "add vaccine_book successful" });
     } catch (err) {
-      console.log(err);
-
       return res.status(500).json({ message: err.message });
     }
   }

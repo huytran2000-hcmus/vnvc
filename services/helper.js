@@ -36,6 +36,7 @@ const isExistVaccine = async (obj) => {
 
   for (let i = 0; i < size; i++) {
     // isExit = -1 if not found name in object else  return index first in array
+
     const isExist = await Vaccine.findOne({ name: obj[i].name });
     if (!isExist) {
       return false;

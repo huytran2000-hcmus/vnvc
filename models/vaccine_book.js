@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const vaccine_bookShema = Schema({
-  total_amount: { type: Number },
+  total_amount: { type: mongoose.Types.Decimal128 },
   subject: {
     name: { type: String },
     birth_date: { type: Date },
@@ -19,15 +19,20 @@ const vaccine_bookShema = Schema({
   },
   vaccine_packets: [
     {
+      _id: mongoose.Types.ObjectId,
       name: { type: String },
     },
   ],
   vaccines: [
     {
+      _id: mongoose.Types.ObjectId,
       name: { type: String },
     },
   ],
-  center: { name: { type: String } },
+  center: {
+    _id: mongoose.Types.ObjectId,
+    name: { type: String },
+  },
 });
 
 module.exports = mongoose.model("Vaccine_book", vaccine_bookShema);
