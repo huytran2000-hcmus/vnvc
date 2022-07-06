@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
-
 const accountShema = new Schema({
   phone: { type: String },
   password: { type: String },
