@@ -8,7 +8,18 @@ class vaccine_infoController {
       const info_vaccine = await Vaccine_info.findOne({
         vaccine_id: vaccine._id,
       }).cache({ time: 30 });
-      return res.json({ data: info_vaccine });
+      const data = {
+        preventions: info_vaccine.preventions,
+        subjects: info_vaccine.subjects,
+        contraindications: info_vaccine.contraindications,
+        instructions: info_vaccine.instructions,
+        origin: info_vaccine.origin,
+        name: vaccine.name,
+        price: vaccine.price,
+        description: vaccine.description,
+        available: vaccine.available,
+      };
+      return res.json({ data: data });
     } catch (err) {
       return res.status(500).json({ message: err.message });
     }
