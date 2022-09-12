@@ -9,9 +9,10 @@ client.on("error", (err) => console.log("Redis Client Error", err));
 // const client = redis.createClient({
 //   url: "redis://localhost:49163",
 // });
-client.on("connect", () => {
+client.on("ready", () => {
   console.log("Redis connection successfull");
 });
+client.on("error", (err) => console.log("Redis Client Error", err));
 client.hget = util.promisify(client.hget);
 const exec = mongoose.Query.prototype.exec;
 

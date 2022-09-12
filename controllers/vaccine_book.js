@@ -49,7 +49,7 @@ class vaccine_infoController {
           .status(400)
           .json({ message: "vaccince Packets is not found" });
       }
-      const total_amount = totalVaccines + totalPackets;
+      const total_amount = (totalVaccines + totalPackets) * 1.2;
       const newVaccine_book = new Vaccine_book({
         total_amount,
         subject,
